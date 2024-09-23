@@ -4,13 +4,13 @@ declare(strict_types=1);
 function power(int $base, int $exp = 2): float
 {
     $total = 1;
-    if ($exp < 0) {
+    if ($exp < 0) { //exponente negativo
         for (; $exp < 0; $exp++) {
             $total *= $base;
         }
         return 1 / $total;
     } //if
-    else {
+    else { //expoñente positivo
         for (; $exp > 0; $exp--) {
             $total *= $base;
         }
@@ -42,7 +42,8 @@ function power(int $base, int $exp = 2): float
     <p><em>Para probar el error del tipo de dato cambiar desde el código</em></p>
     <?php
     try {
-        echo '<p>Resultado : ' . power(intval($_POST["base"])/*"Hola"*/, intval($_POST["exp"])) . '</p>';
+        define("BASE","Hola");
+        echo '<p>Resultado : ' . power(intval($_POST["base"])/*"BASE"*/, intval($_POST["exp"])) . '</p>';
     } catch (TypeError $e) {
         echo "Formato inválido de los datos.";
     } catch (Exception $e) {
