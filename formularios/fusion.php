@@ -16,7 +16,7 @@ function test_input($data) {
         echo 'Welcome ' . test_input($_POST["vNome"]) . '<br>';
         echo 'Your email address is: ' . test_input($_POST["vEmail"]);
     } else { ?>
-        <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>method="post">
+        <form action="verificar.php" method="post">
             Name: <input type="text" name="vNome" required>
             <br>
             E-mail: <input type="text" name="vEmail" >
