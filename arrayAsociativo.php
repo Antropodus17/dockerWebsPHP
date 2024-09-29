@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+/**
+ * Función que recibe un array asociativo y crea un select con los datos del array
+ * @param array $datos
+ * This script is located at /e:/Clases/2º/dockers/DWCS/docker-lamp/www/arrayAsociativo.php
+ * 
+ * @return void
+ */
 function createSelect(array $datos) {
     echo '<select name="opcion">';
     foreach ($datos as $key => $value) {

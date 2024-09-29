@@ -55,10 +55,10 @@ function test_input($data) {
         }
     }
     if ($enviar) { ?>
-        <p><strong><?php echo "You have asked for " . $_POST["cantidad"] . " bottles of " . $productos[$_POST["opcion"]]["text"] . ". Total price to pay: " . (intval($_POST["cantidad"]) * intval($productos[$_POST["opcion"]]["precio"])) . " euros" ?></strong></p>
+        <p><strong><?php echo "You have asked for " . $_POST["cantidad"] . " bottles of " . $productos[$_POST["opcion"]]["text"] . ". Total price to pay: " . (intval($_POST["cantidad"]) * floatval($productos[$_POST["opcion"]]["precio"])) . " euros" ?></strong></p>
 
     <?php } else {
-        echo ($errorMessage == 0 ? "" : "<span style=\"color: red;\">$errorMessage</span>");
+        echo ($errorMessage == 0 ? "" : "<span style=\"color: red;\">$errorMessage</span><br><br><br>");
     ?>
         <form action="ejercicio2.7.php" method="post">
             <?php
