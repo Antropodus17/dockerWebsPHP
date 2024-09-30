@@ -38,7 +38,7 @@ function revisarOpcion($campo, $valor) {
         <label for="Pasword">Password</label><input type="password" name="Pasword" id="tPass" value=<?php echo $formularioEnviado ? validar($_POST["Pasword"]) : ""; ?>><br>
         <label for="City">City of employment</label><input type="text" name="City" id="tCity" value=<?php echo $formularioEnviado ? validar($_POST["City"]) : ""; ?>><br>
         <label for="WebS">Web Server</label>
-        <select name="WebS" id="tWebS" value=<?php echo $formularioEnviado ? validar($_POST["WebS"]) : ""; ?>>
+        <select name="WebS" id="tWebS" >
             <option value="0" <?php echo $formularioEnviado ? (revisarOpcion("WebS", "0") ? "selected" : "") : ""; ?>>--Choose a server--</option>
             <option value="Apache" <?php echo $formularioEnviado ? (revisarOpcion("WebS", "Apache") ? "selected" : "") : ""; ?>>Apache</option>
             <option value="IIS" <?php echo $formularioEnviado ? (revisarOpcion("WebS", "IIs") ? "selected" : "") : ""; ?>>IIS</option>
@@ -60,6 +60,28 @@ function revisarOpcion($campo, $valor) {
         </div>
         <input type="submit" value="enviar">
         <input type="reset" value="reset">
+        <script>
+            Document.addEventListener('DOMContentLoaded', () => {
+                document.querySelector('input[type="reset"]').addEventListener('click', () => {
+                    console.log("reset");
+                    document.querySelectorAll('input[type="text"]').forEach((elemento) => {
+                        elemento.value = "";
+                    });
+                    document.querySelectorAll('input[type="password"]').forEach((elemento) => {
+                        elemento.value = "";
+                    });
+                    document.querySelectorAll('input[type="radio"]').forEach((elemento) => {
+                        elemento.checked = false;
+                    });
+                    document.querySelectorAll('input[type="checkbox"]').forEach((elemento) => {
+                        elemento.checked = false;
+                    });
+                    document.querySelectorAll('select').forEach((elemento) => {
+                        elemento.selectedIndex = 0;
+                    });
+                });
+            });
+        </script>
     </form>
 </body>
 
