@@ -78,7 +78,7 @@ function test_input($data) {
 
         <!-- SI NO SE MUESTRA EL FORMULARIO CON LOS ERRORES EN CASO DE QUE LOS HAYA-->
     <?php } else {
-        echo ($errorMessage == 0 ? "" : "<span style=\"color: red;\">$errorMessage</span>");
+        echo ($errorMessage == 0 ? "" : "<span style=\"color: red;\">$errorMessage</span><br><br><br>");
     ?>
         <!-- INICIO DEL FORMULARIO -->
         <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?> method="post">
