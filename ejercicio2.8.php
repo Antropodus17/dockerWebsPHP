@@ -19,6 +19,7 @@ function revisarOpcion($campo, $valor) {
     }
     return false;
 }
+if (isset())
 ?>
 
 
@@ -39,7 +40,7 @@ function revisarOpcion($campo, $valor) {
         <label for="City">City of employment</label><input type="text" name="City" id="tCity" value=<?php echo $formularioEnviado ? validar($_POST["City"]) : ""; ?>><br>
         <label for="WebS">Web Server</label>
         <select name="WebS" id="tWebS" >
-            <option value="0" <?php echo $formularioEnviado ? (revisarOpcion("WebS", "0") ? "selected" : "") : ""; ?>>--Choose a server--</option>
+            <option value="0" disabled <?php echo $formularioEnviado ? (revisarOpcion("WebS", "0") ? "selected" : "") : ""; ?>>--Choose a server--</option>
             <option value="Apache" <?php echo $formularioEnviado ? (revisarOpcion("WebS", "Apache") ? "selected" : "") : ""; ?>>Apache</option>
             <option value="IIS" <?php echo $formularioEnviado ? (revisarOpcion("WebS", "IIs") ? "selected" : "") : ""; ?>>IIS</option>
             <option value="Nginx" <?php echo $formularioEnviado ? (revisarOpcion("WebS", "Nginx") ? "selected" : "") : ""; ?>>Nginx</option>
