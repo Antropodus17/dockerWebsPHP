@@ -1,10 +1,16 @@
 <?php
 
 declare(strict_types=1);
+
+require_once 'validador.php';
+
+
 $formularioEnviado = false;
 
 function validar($dato) {
     $dato=test_input($dato);
+
+    
     return $dato;
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,7 +52,7 @@ function revisarOpcion($campo, $valor) {
         <label for="Pasword">Password</label><input type="password" name="Pasword" id="tPass" value=<?php echo $formularioEnviado ? validar($_POST["Pasword"]) : ""; ?>><br>
         <label for="City">City of employment</label><input type="text" name="City" id="tCity" value=<?php echo $formularioEnviado ? validar($_POST["City"]) : ""; ?>><br>
         <label for="WebS">Web Server</label>
-        <select name="WebS" id="tWebS" >
+        <select name="WebS" id="tWebS">
             <option value="0" disabled <?php echo $formularioEnviado ? (revisarOpcion("WebS", "0") ? "selected" : "") : ""; ?>>--Choose a server--</option>
             <option value="Apache" <?php echo $formularioEnviado ? (revisarOpcion("WebS", "Apache") ? "selected" : "") : ""; ?>>Apache</option>
             <option value="IIS" <?php echo $formularioEnviado ? (revisarOpcion("WebS", "IIs") ? "selected" : "") : ""; ?>>IIS</option>
