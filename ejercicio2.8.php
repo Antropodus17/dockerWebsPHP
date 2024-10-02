@@ -4,10 +4,18 @@ declare(strict_types=1);
 $formularioEnviado = false;
 
 function validar($dato) {
+    $dato=test_input($dato);
     return $dato;
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $formularioEnviado = true;
+}
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 function revisarOpcion($campo, $valor) {
@@ -19,7 +27,6 @@ function revisarOpcion($campo, $valor) {
     }
     return false;
 }
-if (isset())
 ?>
 
 
