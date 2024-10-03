@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-require_once("./validador.php");
+require_once("./extras/validador.php");
 
 
 
@@ -9,7 +9,7 @@ require_once("./validador.php");
 //FUNCIONES
 
 /**
- * crea el formulario con los datos a enviar.
+ * Crea el formulario de envio.
  * @param bool $enviar Indica si se debe enviar el formulario.
  * @param bool $revisar Indica si se debe revisar el formulario.
  * @return void
