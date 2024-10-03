@@ -8,12 +8,20 @@ require_once 'validador.php';
 $formularioEnviado = false;
 
 function validar($dato) {
-    $validador = new Validador();
-    $validador->clean($dato);
+    $dato=test_input($dato);
+
+    
     return $dato;
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $formularioEnviado = true;
+}
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 function revisarOpcion($campo, $valor) {
