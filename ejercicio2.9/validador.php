@@ -62,4 +62,38 @@ class Validador {
         $data = htmlspecialchars($data);
         return $data;
     }
+
+    /**
+     * Comprueba si se escogio un option dentro del rango de valores.
+     * @param string $campo nombre del select a es igual a uno de los valores de un array. comprobar.
+     * @param array $valores Rango de valores válidos.
+     * @return bool true si el valor es correcto y false si no.
+     */
+    public static function checkCorrectOption(string $campo, array $valores) {
+        if (isset($_POST[$campo])) {
+            foreach ($valores as $valor) {
+                if ($valor == $_POST[$campo]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * funcion intermedia para recuperar info del @see checkEmptyInput.
+     * @param string $campo Campo a comprobar.
+     * @return string Mensaje de error o correcto.
+     * 
+     */
+    public static function validar(string $campo): string {
+        try {
+            checkEmptyInput($campo);
+        } catch (Exception $e) {
+            global $enviarFormulario;
+            $enviarFormulario = false;
+            return $e->getMessage();
+        }
+        return "Correcto";
+    }
 }

@@ -8,6 +8,7 @@ declare(strict_types=1);
  * Array con los datos de los cursos.
  * @var array
  */
+global $datos;
 $datos = ["Java Programming" => 0, "Web Design" => 1, "Dockers administration" => 2, "Django framework" => 3, "Mongo database" => 4];
 
 /**
@@ -20,6 +21,7 @@ $revisarFormulario = false;
  * Variable que indica si se debe enviar el formulario.
  * @var bool
  */
+global $enviarFormulario;
 $enviarFormulario = true;
 
 
@@ -28,7 +30,7 @@ $enviarFormulario = true;
 /**
  * Crea un select con los valores de un array.
  * @param array $array Array con los valores.
- * @param string $name Nombre del select.
+ * @param string $name nombre del select.
  * @return void
  */
 function createSelect(array $array, string $name) {
@@ -51,6 +53,7 @@ function comprobarValorArray(array $array, string|int $key, mixed $value): bool 
     if (isset($array[$key]) && $array[$key] == $value) {
         return true;
     }
+    global $enviarFormulario;
     $enviarFormulario = false;
     return false;
 }
@@ -80,6 +83,7 @@ function checkEmptyInput(string $campo): string {
     if (isset($_POST[$campo]) && $_POST[$campo] != "") {
         return $_POST[$campo];
     }
+    global $enviarFormulario;
     $enviarFormulario = false;
     throw new Exception("El campo $campo no puede estar vacio");
 }
@@ -98,7 +102,7 @@ function clean(string $data): string {
 
 /**
  * Comprueba si se escogio un option dentro del rango de valores.
- * @param string $campo Nombre del select a es igual a uno de los valores de un array. comprobar.
+ * @param string $campo nombre del select a es igual a uno de los valores de un array. comprobar.
  * @param array $valores Rango de valores válidos.
  * @return bool true si el valor es correcto y false si no.
  */
@@ -110,6 +114,7 @@ function checkCorrectOption(string $campo, array $valores) {
             }
         }
     }
+    global $enviarFormulario;
     $enviarFormulario = false;
     return false;
 }
@@ -124,6 +129,7 @@ function validar(string $campo): string {
     try {
         checkEmptyInput($campo);
     } catch (Exception $e) {
+        global $enviarFormulario;
         $enviarFormulario = false;
         return $e->getMessage();
     }
@@ -132,10 +138,13 @@ function validar(string $campo): string {
 
 function enviar(bool $enviar, bool $revisar) {
     if ($enviar == true && $revisar == true) {
-        echo ("<form action= manage.php method='post' name='enviar' display='hidden'>
-        <input type='text' name='Nombre' value=" . $_POST["Nombre"] . " display='hidden'>
-        <input type='text' name='Subject' value=" . $_POST["Subject"] . " display='hidden'>
-        <input type='submit' value='Correcto' display='hidden'>
+        global $datos;
+        $name = array_search($_POST['subject'], $datos);
+        echo ("<form action= manage.php method='post' name='enviar' style='display: none;' enviar='$enviar'>
+        <input type='hidden' name='nombre' value=" . $_POST["nombre"] . ">
+        <input type='hidden' name='subjectN' value=" . $name . ">
+        <input type='hidden' name='subjectV' value=" . $_POST["subject"] . ">
+        <input type='submit' value='Correcto' style='display: none;'>
         </form>");
     }
 }
@@ -162,16 +171,17 @@ function enviar(bool $enviar, bool $revisar) {
     <h1>First practice using forms</h1>
     <!-- FORMULARIO-->
     <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?> method="post">
-        <label for="Nombre">Name and surnames</label>
-        <input type="text" name="Nombre" id="tNombre"><?php echo $revisarFormulario ? validar("Nombre") : "" ?> <br>
-        <?php echo createSelect($datos, 'Subject');
-        echo $revisarFormulario ? (checkCorrectOption("Subject", array_values($datos)) ? "" : "Elije una opcion válida") : "" ?><br>
+        <label for="nombre">Name and surnames</label>
+        <input type="text" name="nombre" id="tnombre"><?php echo $revisarFormulario ? validar("nombre") : "" ?> <br>
+        <?php echo createSelect($datos, 'subject');
+        echo $revisarFormulario ? (checkCorrectOption("subject", array_values($datos)) ? "" : "Elije una opcion válida") : "" ?><br>
         <input type="submit" value="Send Data">
     </form>
     <?php enviar($enviarFormulario, $revisarFormulario); ?>
-    <!-- <script>
-        document.forms.namedItem('enviar').submit();
-    </script> -->
+    <script>
+        let formulario = document.forms.namedItem('enviar');
+        formulario.submit();
+    </script>
 </body>
 
 
