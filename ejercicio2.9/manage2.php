@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 require_once("./extras/validador.php");
-
+require_once("./extras/ayudaFormulario.php");
 
 
 
