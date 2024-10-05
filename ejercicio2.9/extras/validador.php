@@ -29,15 +29,17 @@ class Validador {
      * @access public
      * @param string $campo Campo a comprobar.
      * @param string $valor Valor a comprobar.
-     * @return string "checked" si el campo está seleccionado.
+     * @return bool true si el campo está seleccionado.
      */
-    public function checkInputRadio(string $campo, string $valor): string {
+    public function existInputRadio(string $campo, array $valores): bool {
         if (key_exists($campo, $_POST)) {
-            if ($_POST[$campo] == $valor) {
-                return "checked";
+            foreach ($valores as $valor) {
+                if ($_POST[$campo] == $valor) {
+                    return true;
+                }
             }
+            return false;
         }
-        return "";
     }
 
     /**
@@ -45,9 +47,9 @@ class Validador {
      * @access public
      * @param string $campo Campo a comprobar.
      * @return string Valor del campo.
-     * @throws Exception Si el campo está vacio.
      */
-    public function checkEmptyInput(string $campo): string {
+
+    public function emptyInput(string $campo): string {
         if (key_exists($campo, $_POST)) {
             return $_POST[$campo];
         }
@@ -74,7 +76,7 @@ class Validador {
      * @param array $valores Rango de valores válidos.
      * @return bool true si el valor es correcto y false si no.
      */
-    public function checkCorrectOption(string $campo, array $valores) {
+    public function existCorrectOption(string $campo, array $valores) {
         if (isset($_POST[$campo])) {
             foreach ($valores as $valor) {
                 if ($valor == $_POST[$campo]) {

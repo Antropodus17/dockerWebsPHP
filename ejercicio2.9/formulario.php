@@ -7,6 +7,7 @@ declare(strict_types=1);
 /**
  * Array con los datos de los cursos.
  * @var array
+ * @global
  */
 global $datos;
 $datos = ["Java Programming" => 0, "Web Design" => 1, "Dockers administration" => 2, "Django framework" => 3, "Mongo database" => 4];

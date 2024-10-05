@@ -7,43 +7,27 @@ class AyudaFormulario {
 
     //PROPIEDADES
 
-    private Validador $validador;
+    public Validador $validador;
 
     //CONSTRUCTOR
 
     /**
-     * 
+     * Constructor de la clase AyudaFormulario.
+     * @param Validador $validador Validador de la clase.
      */
-    function __construct() {
-        $validador = new Validador();
+    function __construct(Validador $validador = new Validador()) {
+        $this->validador = $validador;
     }
 
     //SETTERS & GETTERS
 
     /**
-     * 
+     * Setea el validador de la clase.
+     * @access public 
+     * @return Validador.
      */
     public function getValidador(): Validador {
         return $this->validador;
-    }
-
-
-    /**
-     * Crea un select con los valores de un array.
-     * @access public
-     * @param array $array Array con los valores.
-     * @param string $name nombre del select.
-     * @return void
-     */
-    public function createSelect(string $name, array $array): bool {
-        global $validador;
-        echo "<select name='$name' >";
-        echo "<option disable value='0' selected>Select option </option>";
-        foreach ($array as $name => $value) {
-            echo "<option value= $value " . $validador . " >$name</option>";
-        }
-        echo "</select>";
-        return true;
     }
 
     /**
@@ -61,6 +45,23 @@ class AyudaFormulario {
     }
 
     /**
+     * Crea un select con los valores de un array.
+     * @access public
+     * @param array $array Array con los valores.
+     * @param string $name nombre del select.
+     * @return void
+     */
+    public function createSelect(string $name, array $array): bool {
+        echo "<select name='$name' >";
+        echo "<option disable value='0' selected>Select option </option>";
+        foreach ($array as $value) {
+            echo "<option value= $value " . $this->validador->existCorrectOption($name, $array) . " >$value</option>";
+        }
+        echo "</select>";
+        return true;
+    }
+
+    /**
      * Crea un input radio o checkbox.
      * @access public
      * @param string $name Nombre del input.
@@ -73,5 +74,16 @@ class AyudaFormulario {
         foreach ($values as $value) {
             echo "<input type= $type name= $name value= $value >";
         }
+    }
+
+    /**
+     * Muestra un mensaje de error sobre un campo del formulario.
+     * @access public
+     * @param string $nombre Nombre del campo.
+     * @param string $motivo Motivo del error.
+     * @return void
+     */
+    public function errorCampo(string $nombre, string $motivo): string {
+        return "<p style='color:\"red\";'> El campo $nombre $motivo";
     }
 }
