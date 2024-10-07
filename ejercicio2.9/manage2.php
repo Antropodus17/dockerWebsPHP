@@ -84,16 +84,16 @@ function revisionFormulario() {
     global $classesValido;
     global $datos;
     try {
-        $validador->emptyInput("nombre");
+        $validador->emptyInput("nombre", $_GET);
     } catch (Exception $e) {
         $enviarFormulario = false;
         $nombreValido = false;
     }
-    if (!($validador->existCorrectOption('subject', $datos))) {
+    if (!($validador->existCorrectOption('subjectV', $_GET, $datos))) {
         $enviarFormulario = false;
         $subjectValido = false;
     }
-    if (!($validador->existInputRadio('classes', ['In-Person', 'Distance']))) {
+    if (!($validador->existCorrectoption('classes', $_GET, ['In-Person', 'Distance']))) {
         $enviarFormulario = false;
         $classesValido = false;
     }
@@ -101,10 +101,7 @@ function revisionFormulario() {
 
 //INICIACION DE CÓDIGO
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $revisarFormulario = true;
-    revisionFormulario();
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -117,32 +114,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <form action=<?php echo $_SERVER["PHP_SELF"]; ?> method="post">
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["enviar"]) && $_GET["enviar"] == "enviarCorrecion") {
+        $revisarFormulario = true;
+        revisionFormulario();
+        if ($enviarFormulario) {
+            $formulario->generateValidatePost("manage.php", ["nombre" => $_GET["nombre"], "subjectV" => $_GET["subjectV"], "subjectN" => array_search(intval($_GET["subjectV"]), $datos), "classes" => $_GET["classes"]]);
+        }
+    } ?>
+
+    <form action=<?php echo $_SERVER["PHP_SELF"]; ?> method="get">
         <?php
         //INICIO INPUT:TEXT
         global $nombreValido;
         global $validador;
         $formulario->createGeneralInput("nombre", "text", $_GET["nombre"]);
-        echo $nombreValido ? "" : $validador->errorCampo('nombre', 'no puede estar vacio');
+        echo $nombreValido ? "" : $formulario->errorCampo('nombre', 'no puede estar vacio');
         //FIN INPUT:TEXT
         ?><br>
         <?php
         //INICIO SELECT
         global $datos;
         global $validador;
-        $formulario->createSelect('subject', array_values($datos));
-        echo $subjectValido ? "" : $validador->errorCampo('subject', 'no puede estar vacio');
+        $formulario->createSelect('subjectV', $datos, array_values($datos), $_GET["subjectV"]);
+        echo $subjectValido ? "" : $formulario->errorCampo('subject', 'no puede estar vacio');
         //FIN SELECT
         ?><br>
         <?php
         //INICIO INPUT:RADIO
         global $formulario;
         $formulario->createRadioCheckboxInput('classes', 'radio', ["In-Person", "Distance"]);
-        echo $classesValido ? "" : $validador->errorCampo('classes', 'no puede estar vacio');
+        echo $classesValido ? "" : $formulario->errorCampo('classes', 'no puede estar vacio');
         //FIN INPUT:RADIO
         ?><br>
-        <input type="submit" value="enviar">
+        <input type="submit" name="enviar" value="enviarCorrecion">
+
     </form>
+    <script>
+        const form = document.querySelector(".autoenvio");
+        form.submit();
+    </script>
 </body>
 
+>>>>>>> 3a1de27f1f96489237d1dba157a6079f79fff632
 </html>
