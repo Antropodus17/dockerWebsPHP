@@ -31,27 +31,28 @@ class Validador {
      * @param string $valor Valor a comprobar.
      * @return bool true si el campo está seleccionado.
      */
-    public function existInputRadio(string $campo, array $valores): bool {
-        if (key_exists($campo, $_POST)) {
+    public function existInputRadio(string $campo, array $valores, array $form): bool {
+        if (isset($form[$campo])) {
             foreach ($valores as $valor) {
-                if ($_POST[$campo] == $valor) {
+                if ($form[$campo] == $valor) {
                     return true;
                 }
             }
-            return false;
         }
+        return false;
     }
 
     /**
      * Cpmprueba si el input esta vacio.
      * @access public
      * @param string $campo Campo a comprobar.
+     * @param array $form Formulario en el que se va a comprobar.
      * @return string Valor del campo.
      */
 
-    public function emptyInput(string $campo): string {
-        if (key_exists($campo, $_POST)) {
-            return $_POST[$campo];
+    public function emptyInput(string $campo, array $form): string {
+        if (isset($form[$campo])) {
+            return $form[$campo];
         }
         throw new Exception("Campo $campo vacio");
     }
@@ -76,14 +77,28 @@ class Validador {
      * @param array $valores Rango de valores válidos.
      * @return bool true si el valor es correcto y false si no.
      */
-    public function existCorrectOption(string $campo, array $valores) {
-        if (isset($_POST[$campo])) {
+    public function existCorrectOption(string $campo, array $form, array $valores) {
+        if (isset($form[$campo])) {
             foreach ($valores as $valor) {
-                if ($valor == $_POST[$campo]) {
+                if ($valor == $form[$campo]) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * Comprueba si el valor es igual al valor por defecto.
+     * @access public
+     * @param int $valor Valor a comprobar.
+     * @param int $default Valor por defecto.
+     * @return string selected si el valor es igual al valor por defecto.
+     */
+    public function correctOption(int $valor, int $default): string {
+        if ($valor == $default) {
+            return "selected";
+        }
+        return "";
     }
 }

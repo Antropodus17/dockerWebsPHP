@@ -14,8 +14,9 @@ declare(strict_types=1);
 
 <body>
     <main>
-        <p><?php echo $_POST['nombre']; ?> wants to enrol in the following subjects: <?php echo $_POST['subjectN'] ?></p>
-        <?php echo $_SERVER['HTTP_REFERER'] == 'http://localhost/ejercicio2.9/formulario.php' ? "<a href='./manage2.php?nombre=" . $_POST['nombre'] . "&subjectV=" . $_POST['subjectV'] . "" . ($_SERVER['HTTP_REFERER'] == "http://localhost/ejercicio2.9/manage2.php" ? "and " . $_POST['clases'] . " classes" : "") . "'>Continue</a>" : ""; ?>
+        <p><?php echo $_POST['nombre']; ?> wants to enrol in the following subjects: <?php echo $_POST['subjectN'];
+                                                                                        echo preg_split("/\?/", $_SERVER['HTTP_REFERER'])[0] == 'http://localhost/ejercicio2.9/manage2.php' ? "and " . $_POST["classes"] . " classes" : "";  ?></p>
+        <?php echo $_SERVER['HTTP_REFERER'] == 'http://localhost/ejercicio2.9/formulario.php' ? "<a href='./manage2.php?nombre=" . $_POST['nombre'] . "&subjectV=" . $_POST['subjectV'] . "" . ($_SERVER['HTTP_REFERER'] == "http://localhost/ejercicio2.9/manage2.php" ? " and " . $_POST['clases'] . " classes" : "") . "'>Continue</a>" : ""; ?>
 
     </main>
 </body>

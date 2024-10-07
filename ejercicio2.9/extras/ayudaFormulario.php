@@ -1,7 +1,8 @@
 <?php
 
 declare(strict_types=1);
-require_once("./validador.php");
+
+require_once("validador.php");
 
 class AyudaFormulario {
 
@@ -15,8 +16,8 @@ class AyudaFormulario {
      * Constructor de la clase AyudaFormulario.
      * @param Validador $validador Validador de la clase.
      */
-    function __construct(Validador $validador = new Validador()) {
-        $this->validador = $validador;
+    function __construct() {
+        $this->validador = new Validador();
     }
 
     //SETTERS & GETTERS
@@ -51,11 +52,12 @@ class AyudaFormulario {
      * @param string $name nombre del select.
      * @return void
      */
-    public function createSelect(string $name, array $array): bool {
+    public function createSelect(string $name, array $base, array $array, string $default): bool {
+        $i = 0;
         echo "<select name='$name' >";
         echo "<option disable value='0' selected>Select option </option>";
         foreach ($array as $value) {
-            echo "<option value= $value " . $this->validador->existCorrectOption($name, $array) . " >$value</option>";
+            echo "<option value= $value " . $this->validador->correctOption($value, intval($default)) . " >" . array_search($value, $base) . "</option>";
         }
         echo "</select>";
         return true;
@@ -72,7 +74,7 @@ class AyudaFormulario {
     public function createRadioCheckboxInput(string $name, string $type, array $values) {
         echo "<label for= $name>Please specify your $name</label>";
         foreach ($values as $value) {
-            echo "<input type= $type name= $name value= $value >";
+            echo "<input type= $type name= $name value= $value >$value</input>";
         }
     }
 
@@ -85,5 +87,14 @@ class AyudaFormulario {
      */
     public function errorCampo(string $nombre, string $motivo): string {
         return "<p style='color:\"red\";'> El campo $nombre $motivo";
+    }
+
+    public function generateValidatePost(string $destiny, array $enviar) {
+        echo "<form class='autoenvio' action=$destiny method='POST' name='enviarForm'>";
+        foreach ($enviar as $key => $value) {
+            echo "<input type='hidden' name=$key value=$value></input>";
+        }
+        echo "<input type='submit' value='enviarForm'></input>";
+        echo "</form>";
     }
 }
