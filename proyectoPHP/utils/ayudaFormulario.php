@@ -41,7 +41,7 @@ class AyudaFormulario {
      */
     public function createGeneralInput(string $name, string $type = "text", string  $value = ""): bool {
         echo "<label for= $name> $name </label>";
-        echo "<input type= $name name= $name value= $value >";
+        echo "<input type= $type name= $name value= $value >";
         return true;
     }
 
