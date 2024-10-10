@@ -1,16 +1,35 @@
-<?php 
+<?php
+
 declare(strict_types=1);
+session_start();
 
-class pageBasics {
+//IMPORTS
+require_once("./menciones.php");
+
+class PageBasics {
+
+    //ATTRIBUTE
+    public Mentions $mentions = new Mentions();
 
 
-public static function createHeader(string $imgPath,string $title) : void {
-    echo "<header>
-        <img src='$imgPath' alt='Logo'>
-        <h3>$title</h3>
+    //FUNCTIONS
+    /**
+     * 
+     */
+    public function createHeader(): void {
+        echo "<header>
+        <img src='../img/satisfactory logo.png' alt='Logo'>
+        <h3>$</h3>
+        <section></section>
     </header>";
-}
+    }
 
 
+    /**
+     * 
+     */
+    public function createFooter() {
+
+        $this->mentions->start();
+    }
 }
-?>
