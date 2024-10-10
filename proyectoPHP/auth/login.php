@@ -2,11 +2,17 @@
 
 declare(strict_types=1);
 
+session_start();
+
 //IMPORTS
 require_once("../utils/validador.php");
+require_once("../utils/errors/UserException.php");
+require_once("../utils/errors/PasswordException.php");
 
 //VARIABLES
 global $errorMessage;
+$errorMessage = [];
+
 
 //SIMULATION OF DATABASE
 global $usersDatabase;
@@ -25,54 +31,56 @@ $validator = new Validador();
 /**
  * 
  */
-function loginSucces()
-{
+function loginSucces() {
     global $validator;
-    session_start([
-        "user" => $validator->clean($_POST["user"]),
-        "password" => $validator->clean($_POST["paswd"])
-    ]);
-    $redirect=$_COOKIE["noUser"];
-    header("Location: $redirect");
+
+    $_SESSION["user"] = $validator->clean($_POST["user"]);
+    $_SESSION["paswd"] = $validator->clean($_POST["paswd"]);
+    $redirect = $_COOKIE["noUser"];
+    setcookie("noUser", "",);
+    header("Location: localhost://" . $redirect);
+    exit();
 }
 
 /**
  * 
  */
-function validatePassword()
-{
+function validatePassword() {
+
     global $usersDatabase;
     global $validator;
     if (!$validator->comprobarValorArray($usersDatabase, $validator->clean($_POST["user"]), $validator->clean($_POST["paswd"]))) {
-        throw new Exception("Wrong password");
+        throw new PasswordException("Wrong password");
     }
 }
 
 /**
  * 
  */
-function validateUser()
-{
-    global $usersDatabase;
+function validateUser() {
+    global $estado;
+    $estado = "Validating User";
     global $validator;
-    if (!isset($validator->clean($_POST["user"]))) {
-        throw new Exception("Wrong user");
+    if (null === $validator->clean($_POST["user"])) {
+        throw new UserException("Wrong user");
     }
 }
 
 /**
  * 
  */
-function validateLogin()
-{
+function validateLogin() {
     $loginSucces = true;
-
+    global $errorMessage;
     //VALIDATIONS
     try {
         validateUser();
         validatePassword();
-    } catch (Exception $e) { //ERROR IN VALIDATION
-        $errorMessage = $e->getMessage();
+    } catch (UserException $e) { //ERROR IN VALIDATION
+        $errorMessage["user"] = $e->getMessage();
+        $loginSucces = false;
+    } catch (PasswordException $e) {
+        $errorMessage["paswd"] = $e->getMessage();
         $loginSucces = false;
     }
     if ($loginSucces) { //VALIDATION OKEY?
@@ -82,7 +90,9 @@ function validateLogin()
 
 //REVISION
 
-if ($_SERVER["HTTP_REFERER"] == $_SERVER["PHP_SELF"]) {
+if (isset($_POST["login"]) && $_POST["login"] === "si") {
+
+    validateLogin();
 }
 
 
@@ -100,10 +110,16 @@ if ($_SERVER["HTTP_REFERER"] == $_SERVER["PHP_SELF"]) {
     <form action=<?php echo $_SERVER["PHP_SELF"]; ?> method="post">
 
         <label for="user">User: </label>
-        <input type="text" name="user" id="iUser"><br>
-        <label for="paswd">Password</label>
-        <input type="password" name="paswd" id="iPaswd"><br>
+        <input type="text" name="user" id="iUser"><?php global $errorMessage;
+                                                    isset($errorMessage["user"]) ? ("<p>" . $errorMessage["user"] . "</p>") : "" ?><br>
+        <label for="paswd">Password: </label>
+        <input type="password" name="paswd" id="iPaswd"><?php global $errorMessage;
+                                                        isset($errorMessage["paswd"]) ? ("<p>" . $errorMessage["paswd"] . "</p>") : "" ?><br>
         <input type="submit" value="Iniciar Sesion">
+        <input type="hidden" name="login" value="si">
+        <?php
+        echo $_SESSION["user"] . "<br>";
+        echo $_COOKIE["noUser"] . "<br>"; ?>
     </form>
 </body>
 
