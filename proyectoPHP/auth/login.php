@@ -37,7 +37,7 @@ function loginSucces() {
 
     $_SESSION["user"] = $validator->clean($_POST["user"]);
     $_SESSION["paswd"] = $validator->clean($_POST["paswd"]);
-    $redirect = "../.."  .  $_COOKIE["noUser"];
+    $redirect = ""  .  $_COOKIE["noUser"];
     setcookie("noUser", "", -1);
     header("Location: $redirect");
     exit();
@@ -105,6 +105,8 @@ if (isset($_POST["login"]) && $_POST["login"] === "si") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
+    <link rel="stylesheet" href="/proyectoPHP/styles/main.css">
+    <link rel="stylesheet" href="/proyectoPHP/styles/headerFooter.css">
 </head>
 
 <body>

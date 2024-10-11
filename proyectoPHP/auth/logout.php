@@ -9,7 +9,7 @@ if (isset($_POST["confirm"])) {
         session_unset();
         session_destroy();
     }
-    header("Location: ../../proyectoPHP");
+    header("Location: /proyectoPHP/");
     exit();
 }
 ?>
