@@ -37,9 +37,13 @@ function loginSucces() {
 
     $_SESSION["user"] = $validator->clean($_POST["user"]);
     $_SESSION["paswd"] = $validator->clean($_POST["paswd"]);
-    $redirect = ""  .  $_COOKIE["noUser"];
-    setcookie("noUser", "", -1);
-    header("Location: $redirect");
+    if (isset($_COOKIE["noUser"])) { //RETURN TO THE LAST PAGE
+        $redirect = ""  .  $_COOKIE["noUser"];
+        setcookie("noUser", "", -1);
+        header("Location: $redirect");
+    } else { //RETURN TO THE INDEX
+        header("Location: /proyectoPHP/");
+    }
     exit();
 }
 

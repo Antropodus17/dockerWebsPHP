@@ -98,4 +98,3 @@ class AyudaFormulario {
         echo "</form>";
     }
 }
->>>>>>> 3a1de27f1f96489237d1dba157a6079f79fff632

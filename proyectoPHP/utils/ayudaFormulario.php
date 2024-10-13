@@ -53,7 +53,6 @@ class AyudaFormulario {
      * @return void
      */
     public function createSelect(string $name, array $base, array $array, string $default): bool {
-        $i = 0;
         echo "<select name='$name' >";
         echo "<option disable value='0' selected>Select option </option>";
         foreach ($array as $value) {

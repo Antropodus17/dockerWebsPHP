@@ -27,7 +27,14 @@ if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
     <?php $pageBasics = new PageBasics();
     $pageBasics->createHeader(); ?>
     <main>
-        <p>Hola</p>
+        <h1>Energy Calculator</h1>
+        <form action=<?php $_SERVER["PHP_SELF"] ?> method="post">
+            <label for="generator"></label>
+            <select name="generator" id="sGenerator">
+                <option value="-1">Select option</option>
+            </select>
+
+        </form>
     </main>
     <?php
     $pageBasics = new PageBasics();

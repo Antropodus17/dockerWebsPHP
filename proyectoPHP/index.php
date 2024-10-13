@@ -1,21 +1,33 @@
 <?php
+
 declare(strict_types=1);
+
+session_start();
+
+//IMPORTS
+require_once("./utils/pageBasics.php");
+
 
 
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satisfactory calculator</title>
-    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="/proyectoPHP/styles/headerFooter.css">
+    <link rel="stylesheet" href="/proyectoPHP/styles/main.css">
 </head>
+
 <body>
     <header>
-        <img src="./img/satisfactory logo.png" alt="Logo">
-        <h3>Satisfactory Calculator</h3>
+        <?php
+        $pageBasics = new PageBasics();
+        $pageBasics->createHeader()
+        ?>
     </header>
     <main>
         <h1>Welcome to the satisfactory Calculator</h1>
@@ -33,7 +45,8 @@ declare(strict_types=1);
         </a>
     </main>
     <footer>
-        
+
     </footer>
 </body>
+
 </html>
