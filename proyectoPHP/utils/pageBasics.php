@@ -5,6 +5,8 @@ declare(strict_types=1);
 
 //IMPORTS
 require_once("menciones.php");
+require_once("satisfactoryObjects.php");
+require_once("validador.php");
 
 /**
  * Class PageBasics
@@ -13,6 +15,8 @@ require_once("menciones.php");
  * @version 1.0
  */
 class PageBasics {
+
+    public static int $indiceForm = 0;
 
     //ATTRIBUTE
     /**
@@ -24,6 +28,8 @@ class PageBasics {
 
     public Validador $validador;
 
+    public SatisfactoryObjects $dataBase;
+
     //CONSTRUCTOR
     /**
      * PageBasics constructor.
@@ -32,6 +38,7 @@ class PageBasics {
     function __construct() {
         $this->mentions = new Mentions();
         $this->validador = new Validador();
+        $this->dataBase = new SatisfactoryObjects();
     }
     //FUNCTIONS
     /**
@@ -60,13 +67,28 @@ class PageBasics {
         echo '</footer>';
     }
 
-
-    public function createSelect(string $name, array $objects) {
-        echo "<select name='$name' >";
-        echo "<option disable value='0' selected>Select option </option>";
-        foreach ($objects as $key => $value) {
-            echo "<option value= $key";
+    /**
+     * Create a form to select the resources and the quantity of the resources.
+     * @access public
+     */
+    public function createResourcesForm() {
+        echo "<form action=" . $_SERVER["PHP_SELF"] . " method='post'>";
+        echo "<select name='resource" . $this::$indiceForm . "'>";
+        echo "<option disable value='0' selected>Select Resurce </option>";
+        foreach ($this->dataBase->resources as $key => $value) {
+            echo "<option value=$key> " . $this->dataBase->getResourcesName($key) . " </option>";
         }
         echo "</select>";
+        echo "<input type='number' name='cantidad" . $this::$indiceForm . "'></input>";
+        echo "<input type='submit' value='Calcular'></input>";
+        echo "</form>";
+    }
+
+    /**
+     * Echo the basic css of the web.
+     */
+    public static function basicCss() {
+        echo "<link rel='stylesheet' href='/proyectoPHP/styles/main.css'>";
+        echo "<link rel='stylesheet' href='/proyectoPHP/styles/headerFooter.css'>";
     }
 }

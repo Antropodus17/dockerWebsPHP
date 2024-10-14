@@ -63,7 +63,7 @@ class Validador {
      * @param string $data Dato a limpiar.
      * @return string Dato limpio.
      */
-    public function clean(string $data): string {
+    public static function clean(string $data): string {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);

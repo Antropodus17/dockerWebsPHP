@@ -19,8 +19,8 @@ if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energy Calculator</title>
-    <link rel="stylesheet" href="/proyectoPHP/styles/main.css">
-    <link rel="stylesheet" href="/proyectoPHP/styles/headerFooter.css">
+    <?php PageBasics::basicCss() ?>
+
 </head>
 
 <body>

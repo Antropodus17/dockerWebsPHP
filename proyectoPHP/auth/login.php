@@ -109,8 +109,7 @@ if (isset($_POST["login"]) && $_POST["login"] === "si") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
-    <link rel="stylesheet" href="/proyectoPHP/styles/main.css">
-    <link rel="stylesheet" href="/proyectoPHP/styles/headerFooter.css">
+
 </head>
 
 <body>
