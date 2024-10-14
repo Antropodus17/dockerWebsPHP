@@ -22,10 +22,10 @@ class SatisfactoryObjects {
     //CONSTRUCTOR
     function __construct() {
         $this->resources = [
-            "PlanchaHierro" => [["Plancha de Hierro", 3], [["Lingote de Hierro", 2]]],
-            "BarraHierro" => [["Barra de Hierro", 2], [["Lingote de Hierro", 1]]],
-            "Tornillos" => [["Tornillos", 5], [["Barra de Hierro", 1]]],
-            "PlanchaHierroReforzada" => [["Plancha de Hierro Reforzada"], [["Plancha de Hierro", 1], ["Tornillos", 25]]]
+            "PlanchaHierro" => [["Plancha de Hierro", 3], [["Lingote de Hierro", 2, false]]],
+            "BarraHierro" => [["Barra de Hierro", 2], [["Lingote de Hierro", 1, false]]],
+            "Tornillos" => [["Tornillos", 5], [["Barra de Hierro", 1, true]]],
+            "PlanchaHierroReforzada" => [["Plancha de Hierro Reforzada", 1], [["Plancha de Hierro", 1, true], ["Tornillos", 25, true]]]
         ];
         $this->generators = [
             "QuemadorBiomasa" => ["Quemador de biomasa", 30],

@@ -23,9 +23,6 @@ $usersDatabase = [
 ];
 
 
-//OBJECTS
-global $validator;
-$validator = new Validador();
 
 //FUNCTIONS
 
@@ -35,8 +32,8 @@ $validator = new Validador();
 function loginSucces() {
     global $validator;
 
-    $_SESSION["user"] = $validator->clean($_POST["user"]);
-    $_SESSION["paswd"] = $validator->clean($_POST["paswd"]);
+    $_SESSION["user"] = Validador::clean($_POST["user"]);
+    $_SESSION["paswd"] = Validador::clean($_POST["paswd"]);
     if (isset($_COOKIE["noUser"])) { //RETURN TO THE LAST PAGE
         $redirect = ""  .  $_COOKIE["noUser"];
         setcookie("noUser", "", -1);
@@ -53,8 +50,8 @@ function loginSucces() {
 function validatePassword() {
 
     global $usersDatabase;
-    global $validator;
-    if (!$validator->comprobarValorArray($usersDatabase, $validator->clean($_POST["user"]), $validator->clean($_POST["paswd"]))) {
+    $validator = new Validador();
+    if (!$validator->comprobarValorArray($usersDatabase, Validador::clean($_POST["user"]), Validador::clean($_POST["paswd"]))) {
         throw new PasswordException("Wrong password");
     }
 }
@@ -65,8 +62,8 @@ function validatePassword() {
 function validateUser() {
     global $estado;
     $estado = "Validating User";
-    global $validator;
-    if (null === $validator->clean($_POST["user"])) {
+
+    if (null === Validador::clean($_POST["user"])) {
         throw new UserException("Wrong user");
     }
 }
@@ -109,6 +106,7 @@ if (isset($_POST["login"]) && $_POST["login"] === "si") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
+    <?php PageBasics::basicCss(); ?>
 
 </head>
 

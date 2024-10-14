@@ -1,6 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
+//IMPORTS
+require_once("../utils/pageBasics.php");
+
 session_start();
 
 
@@ -20,9 +24,14 @@ if (isset($_POST["confirm"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Out</title>
+    <?php PageBasics::basicCss() ?>
 </head>
 
 <body>
+    <?php
+    $header = new PageBasics();
+    $header->createHeader();
+    ?>
     <?php echo $_SESSION["user"]; ?>
     <form action=<?php echo $_SERVER["PHP_SELF"] ?> method="post">
         <label for="confirm">Do you really want to sign out?</label>
@@ -30,6 +39,11 @@ if (isset($_POST["confirm"])) {
         <input type="radio" name="confirm" id="rNo" value="no">No</input>
         <input type="submit" value="confirmar">
     </form>
+
+    <?php
+    $footer = new PageBasics();
+    $footer->createFooter();
+    ?>
 </body>
 
 </html>

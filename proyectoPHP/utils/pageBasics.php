@@ -50,8 +50,9 @@ class PageBasics {
         echo "<a href='/proyectoPHP/'><img src='/proyectoPHP/img/satisfactory logo.png' alt='Logo'></a>
         <h3>Satisfactory Calculator</h3><section>";
         if (isset($_SESSION["user"])) {
-            echo "<img src='/proyectoPHP/img/defaultLogin.png'alt='Foto de sesion'>";
-        } else if ($_SERVER["PHP_SELF"] === "") {
+            echo "<a href='/proyectoPHP/auth/logout.php'><img src='/proyectoPHP/img/defaultLogin.png'alt='Foto de sesion'></a>";
+        } else if ($_SERVER["PHP_SELF"] === "/proyectoPHP/auth/login.php") {
+        } else {
             echo "<a href='/proyectoPHP/auth/login.php'><img src='/proyectoPHP/img/makeLogin.png'alt='Foto de sesion'></a>";
         }
         echo "</section>";
@@ -71,7 +72,7 @@ class PageBasics {
      * Create a form to select the resources and the quantity of the resources.
      * @access public
      */
-    public function createResourcesForm() {
+    public function createResourcesForm(): void {
         echo "<form action=" . $_SERVER["PHP_SELF"] . " method='post'>";
         echo "<select name='resource" . $this::$indiceForm . "'>";
         echo "<option disable value='0' selected>Select Resurce </option>";
@@ -81,6 +82,22 @@ class PageBasics {
         echo "</select>";
         echo "<input type='number' name='cantidad" . $this::$indiceForm . "'></input>";
         echo "<input type='submit' value='Calcular'></input>";
+        echo "</form>";
+    }
+
+
+    public function createGeneratorForm(): void {
+        echo "<form action=" . $_SERVER["PHP_SELF"] . " method='post'>";
+        echo "<article>";
+        foreach ($this->dataBase->generators as $index => $generator) {
+            echo "<section index=" . $this::$indiceForm++ . ">";
+            echo "<label for='$index'>$generator[0]</label>";
+            echo "<entrada><input type='number' name='$index'>Cantidad</input></entrada>";
+            echo "<entrada><input type='number' name='" . $index . "Percentage'>Rendimiento(%)</input></entrada>";
+            echo "</section>";
+        }
+        echo "</article>";
+        echo "<input type='submit' value='Calcular'>";
         echo "</form>";
     }
 

@@ -20,6 +20,7 @@ if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energy Calculator</title>
     <?php PageBasics::basicCss() ?>
+    <link rel="stylesheet" href="../styles/generatorForm.css">
 
 </head>
 
@@ -28,13 +29,11 @@ if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
     $pageBasics->createHeader(); ?>
     <main>
         <h1>Energy Calculator</h1>
-        <form action=<?php $_SERVER["PHP_SELF"] ?> method="post">
-            <label for="generator"></label>
-            <select name="generator" id="sGenerator">
-                <option value="-1">Select option</option>
-            </select>
+        <?php
+        $pageBasics = new PageBasics();
+        $pageBasics->createGeneratorForm();
 
-        </form>
+        ?>
     </main>
     <?php
     $pageBasics = new PageBasics();

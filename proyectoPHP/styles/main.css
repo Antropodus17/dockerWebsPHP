@@ -1,1 +1,6 @@
-input: ;
+body {
+	background-color: #e4eef3;
+}
+.answer {
+	border: 1px solid black;
+}
