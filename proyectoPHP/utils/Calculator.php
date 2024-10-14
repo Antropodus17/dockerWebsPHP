@@ -19,7 +19,7 @@ class Calculator {
     public SatisfactoryObjects $dataBase;
 
 
-    //CONSTRUVCTOR
+    //CONSTRUCTOR
 
     /**
      * Calculator constructor.

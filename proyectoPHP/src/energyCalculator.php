@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 //IMPORTS
 require_once("../utils/pageBasics.php");
+//IMPOR
 
 session_start();
 if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
@@ -11,6 +12,12 @@ if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
     header("Location: /proyectoPHP/auth/login.php");
     exit;
 }
+
+
+//FUNCIONES 
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

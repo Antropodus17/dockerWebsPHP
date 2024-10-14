@@ -1,4 +1,7 @@
 <?php
 
-final class UserException extends Exception implements Throwable {
+/**
+ * 
+ */
+final class UserException extends Exception {
 }

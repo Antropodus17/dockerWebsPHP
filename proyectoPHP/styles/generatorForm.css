@@ -6,7 +6,7 @@ article {
 }
 
 main section {
-	width: 300px;
+	width: 320px;
 	height: 500px;
 	background-color: #f89f54;
 	border-radius: 50px;
@@ -17,7 +17,7 @@ main section {
 }
 input[type="number"] {
 	height: 25px;
-	width: 100px;
+	width: 50px;
 	margin: 10px;
 }
 

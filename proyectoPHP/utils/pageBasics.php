@@ -93,7 +93,16 @@ class PageBasics {
             echo "<section index=" . $this::$indiceForm++ . ">";
             echo "<label for='$index'>$generator[0]</label>";
             echo "<entrada><input type='number' name='$index'>Cantidad</input></entrada>";
-            echo "<entrada><input type='number' name='" . $index . "Percentage'>Rendimiento(%)</input></entrada>";
+            echo "<entrada><input type='number' name='" . $index . "Percentage'>Rendimiento(0-250%)</input></entrada>";
+            try {
+                if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                    $this->validador->validateGeneratorForm($index);
+                }
+            } catch (GeneratorUdsException $e) {
+                echo "<error>" . $e->getMessage() . "</error>";
+            } catch (GeneratorPercentageException $e) {
+                echo '<error>' . $e->getMessage() . '</error>';
+            }
             echo "</section>";
         }
         echo "</article>";
