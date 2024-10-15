@@ -4,8 +4,9 @@
 require_once("satisfactoryObjects.php");
 
 /**
- * Class Calculator
- * a class to calculate the resources needed to create a product and the total energy.
+ * Class Calculator to calculate the resources needed to create a product and the total energy.
+ * @package proyectoPHP/utils
+ * @author A23SergioPN
  */
 class Calculator {
 
@@ -14,7 +15,7 @@ class Calculator {
     /**
      * @var SatisfactoryObjects $dataBase to get the data from the 'database'.
      * @access public
-     * @link proyectoPHP/utils/satisfactoryObjects.php
+     * 
      */
     public SatisfactoryObjects $dataBase;
 
@@ -24,6 +25,7 @@ class Calculator {
     /**
      * Calculator constructor.
      * @access public
+     * @return void
      */
     public function __construct() {
         $this->dataBase = new SatisfactoryObjects();
@@ -58,6 +60,14 @@ class Calculator {
         echo "</section>";
     }
 
+    /**
+     * Calculate and show the total energy of a generator.
+     * @param string $index the generator to calculate.
+     * @param int $uds the total of generators.
+     * @param float $percentage the percentage of the capacity of the generator.
+     * @access public
+     * @return void
+     */
     public function calculateGenerator(string $index, int $uds, float $percentage): void {
         $generator = $this->dataBase->generators[$index];
         $totalEnergy = $generator[1] * $uds * $percentage / 100;

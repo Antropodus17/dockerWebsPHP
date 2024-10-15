@@ -1,0 +1,21 @@
+form {
+	height: 6vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+select,
+input {
+	margin: 3vh;
+	border-radius: 15px;
+	background-color: #4d5353;
+	border: 2px solid #f89f54;
+	color: #e4eef3;
+}
+select:focus,
+input:focus {
+	background-color: #f89f54;
+	border-color: #4d5353;
+}

@@ -14,18 +14,36 @@ if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
     exit();
 }
 
-function validateUds($cantidad): bool {
+/**
+ * Validate the amount of resources and if it is a positive integer
+ * @param string $cantidad the amount of resources
+ * @return bool if the amount is a positive integer
+ * @package proyectoPHP/src
+ * @author A23SergioPN
+ */
+function validateUds(string $cantidad): bool {
 
     return is_int(intval($cantidad)) && intval($cantidad) > 0;
 }
 
-
+/**
+ * Validate the index of the resource
+ * @param string $resource the index of the resource
+ * @return string the index of the resource cleaned
+ * @package proyectoPHP/src
+ * @author A23SergioPN
+ */
 function validateIndex($resource): string {
     $resource = Validador::clean($resource);
     return $resource;
 }
 
-
+/**
+ * Validate the form of the resources
+ * @return bool if the form is valid
+ * @package proyectoPHP/src
+ * @author A23SergioPN
+ */
 function validateResourceForm(): bool {
     return is_string(validateIndex($_POST["resource0"])) && validateUds($_POST["cantidad0"]);
 }
@@ -39,6 +57,7 @@ function validateResourceForm(): bool {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energy Calculator</title>
     <?php PageBasics::basicCss(); ?>
+    <link rel="stylesheet" href="../styles/resourcesForm.css">
 </head>
 
 <body>

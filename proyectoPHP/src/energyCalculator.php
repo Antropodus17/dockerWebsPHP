@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 //IMPORTS
 require_once("../utils/pageBasics.php");
-//IMPOR
+
 
 session_start();
 if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
@@ -12,10 +12,6 @@ if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
     header("Location: /proyectoPHP/auth/login.php");
     exit;
 }
-
-
-//FUNCIONES 
-
 
 
 ?>
@@ -27,7 +23,7 @@ if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energy Calculator</title>
     <?php PageBasics::basicCss() ?>
-    <link rel="stylesheet" href="../styles/generatorForm.css">
+    <link rel="stylesheet" href="../styles/generatorForm.css?">
 
 </head>
 

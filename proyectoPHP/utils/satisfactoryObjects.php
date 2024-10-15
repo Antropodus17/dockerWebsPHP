@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 /**
  * Class SatisfactoryObjects to simulate a data base for the objects of the game.
+ * @package proyectoPHP/utils
+ * @author A23SergioPN
  */
 class SatisfactoryObjects {
 
@@ -11,15 +13,25 @@ class SatisfactoryObjects {
 
     /**
      * Array simulating the resources of the game.
+     * @access public
+     * @var array $resources
      */
     public array $resources;
 
     /**
      * Array simulating the generators of the game.
+     * @access public
+     * @var array $generators
      */
     public array $generators;
 
     //CONSTRUCTOR
+
+    /**
+     * Constructor of the class SatisfactoryObjects.
+     * @access public
+     * @return void
+     */
     function __construct() {
         $this->resources = [
             "PlanchaHierro" => [["Plancha de Hierro", 3], [["Lingote de Hierro", 2, false]]],
