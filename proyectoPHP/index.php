@@ -18,8 +18,7 @@ require_once("./utils/pageBasics.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satisfactory calculator</title>
-    <link rel="stylesheet" href="/proyectoPHP/styles/headerFooter.css">
-    <link rel="stylesheet" href="/proyectoPHP/styles/main.css">
+    <?php PageBasics::basicCss() ?>
 </head>
 
 <body>

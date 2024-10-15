@@ -1,6 +1,10 @@
 body {
 	background-color: #e4eef3;
 }
+main {
+	width: 100%;
+	height: 65%;
+}
 .answer {
 	border: 1px solid black;
 }

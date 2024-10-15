@@ -15,7 +15,9 @@ class Mentions {
      * 
      */
     public function start(): void {
-        $MentionsList = ["Entrada iconos creados por Ch.designer - Flaticon" => "https://www.flaticon.es/iconos-gratis/entrada"];
+        $MentionsList = [
+            "Entrada iconos creados por Ch.designer - Flaticon" => "https://www.flaticon.es/iconos-gratis/entrada"
+        ];
         $this->printMentions($MentionsList);
     }
 

@@ -25,6 +25,7 @@ if (isset($_POST["confirm"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Out</title>
     <?php PageBasics::basicCss() ?>
+    <link rel="stylesheet" href="../styles/logout.css">
 </head>
 
 <body>
@@ -32,11 +33,10 @@ if (isset($_POST["confirm"])) {
     $header = new PageBasics();
     $header->createHeader();
     ?>
-    <?php echo $_SESSION["user"]; ?>
     <form action=<?php echo $_SERVER["PHP_SELF"] ?> method="post">
         <label for="confirm">Do you really want to sign out?</label>
-        <input type="radio" name="confirm" id="rYes" value="yes">Yes</input>
-        <input type="radio" name="confirm" id="rNo" value="no">No</input>
+        <label for="confirm2">Yes<input type="radio" name="confirm" id="rYes" value="yes"></input></label>
+        <label for="confirm3">No<input type="radio" name="confirm" id="rNo" value="no"></input></label>
         <input type="submit" value="confirmar">
     </form>
 

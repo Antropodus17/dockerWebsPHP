@@ -57,4 +57,12 @@ class Calculator {
         }
         echo "</section>";
     }
+
+    public function calculateGenerator(string $index, int $uds, float $percentage): void {
+        $generator = $this->dataBase->generators[$index];
+        $totalEnergy = $generator[1] * $uds * $percentage / 100;
+        echo "<section class='answer'>";
+        echo "<p>With $uds $generator[0] at $percentage of capacity: $totalEnergy</p>";
+        echo "</section>";
+    }
 }

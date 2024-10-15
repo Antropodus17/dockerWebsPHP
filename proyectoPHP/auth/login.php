@@ -14,6 +14,8 @@ require_once("../utils/pageBasics.php");
 global $errorMessage;
 $errorMessage = [];
 
+global $estado;
+$estado = 'ben';
 
 //SIMULATION OF DATABASE
 global $usersDatabase;
@@ -21,6 +23,8 @@ $usersDatabase = [
     "root" => "abc123.",
     "user" => "prueba"
 ];
+
+
 
 
 
@@ -32,8 +36,6 @@ $usersDatabase = [
 function loginSucces() {
     global $validator;
 
-    $_SESSION["user"] = Validador::clean($_POST["user"]);
-    $_SESSION["paswd"] = Validador::clean($_POST["paswd"]);
     if (isset($_COOKIE["noUser"])) { //RETURN TO THE LAST PAGE
         $redirect = ""  .  $_COOKIE["noUser"];
         setcookie("noUser", "", -1);
@@ -49,24 +51,17 @@ function loginSucces() {
  */
 function validatePassword() {
 
-    global $usersDatabase;
+    $usersDatabase = [
+        "root" => "abc123.",
+        "user" => "prueba"
+    ];
     $validator = new Validador();
     if (!$validator->comprobarValorArray($usersDatabase, Validador::clean($_POST["user"]), Validador::clean($_POST["paswd"]))) {
         throw new PasswordException("Wrong password");
     }
 }
 
-/**
- * 
- */
-function validateUser() {
-    global $estado;
-    $estado = "Validating User";
 
-    if (null === Validador::clean($_POST["user"])) {
-        throw new UserException("Wrong user");
-    }
-}
 
 /**
  * 
@@ -93,7 +88,8 @@ function validateLogin() {
 //REVISION
 
 if (isset($_POST["login"]) && $_POST["login"] === "si") {
-
+    global $estado;
+    $estado = 'post';
     validateLogin();
 }
 
@@ -107,6 +103,7 @@ if (isset($_POST["login"]) && $_POST["login"] === "si") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
     <?php PageBasics::basicCss(); ?>
+    <link rel="stylesheet" href="../styles/login.css">
 
 </head>
 
@@ -116,20 +113,7 @@ if (isset($_POST["login"]) && $_POST["login"] === "si") {
     $pageBasics->createHeader();
     ?>
     <main>
-        <form action=<?php echo $_SERVER["PHP_SELF"]; ?> method="post">
 
-            <label for="user">User: </label>
-            <input type="text" name="user" id="iUser"><?php global $errorMessage;
-                                                        isset($errorMessage["user"]) ? ("<p>" . $errorMessage["user"] . "</p>") : "" ?><br>
-            <label for="paswd">Password: </label>
-            <input type="password" name="paswd" id="iPaswd"><?php global $errorMessage;
-                                                            isset($errorMessage["paswd"]) ? ("<p>" . $errorMessage["paswd"] . "</p>") : "" ?><br>
-            <input type="submit" value="Iniciar Sesion">
-            <input type="hidden" name="login" value="si">
-            <?php
-            echo $_SESSION["user"] . "<br>";
-            echo $_COOKIE["noUser"] . "<br>"; ?>
-        </form>
     </main>
     <?php
     $pageBasics = new PageBasics();

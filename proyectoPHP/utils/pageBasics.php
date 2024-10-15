@@ -7,6 +7,7 @@ declare(strict_types=1);
 require_once("menciones.php");
 require_once("satisfactoryObjects.php");
 require_once("validador.php");
+require_once("Calculator.php");
 
 /**
  * Class PageBasics
@@ -30,6 +31,7 @@ class PageBasics {
 
     public SatisfactoryObjects $dataBase;
 
+    public Calculator $calculator;
     //CONSTRUCTOR
     /**
      * PageBasics constructor.
@@ -39,6 +41,7 @@ class PageBasics {
         $this->mentions = new Mentions();
         $this->validador = new Validador();
         $this->dataBase = new SatisfactoryObjects();
+        $this->calculator = new Calculator();
     }
     //FUNCTIONS
     /**
@@ -97,11 +100,12 @@ class PageBasics {
             try {
                 if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $this->validador->validateGeneratorForm($index);
+                    $this->calculator->calculateGenerator($index, intval($_POST[$index]), floatval($_POST[$index . "Percentage"]));
                 }
             } catch (GeneratorUdsException $e) {
-                echo "<error>" . $e->getMessage() . "</error>";
+                echo "<section class='answer'>" . $e->getMessage() . "</section class='answer'>";
             } catch (GeneratorPercentageException $e) {
-                echo '<error>' . $e->getMessage() . '</error>';
+                echo '<section class="answer">' . $e->getMessage() . '</section class="answer">';
             }
             echo "</section>";
         }
@@ -109,6 +113,32 @@ class PageBasics {
         echo "<input type='submit' value='Calcular'>";
         echo "</form>";
     }
+
+
+    public function createLogin(): void {
+        $validate = false;
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $validate = true;
+        }
+        echo '<form action=' . $_SERVER["PHP_SELF"] . ' ?> method="post">';
+        echo '<section class="entrada">';
+        echo '<label for="user">User: </label>';
+        echo '<input type="text" name="user" id="iUser">';
+        if ($validate) {
+            $this->validador->validateUserLogin($this->);
+        }
+        echo '</section><br>';
+        echo '<section class="entrada">';
+        echo '<label for="paswd">Password: </label>';
+        echo '<input type="password" name="paswd" id="iPaswd">';
+        echo '</section><br>';
+        echo '<section class="enviar">';
+        echo '<input type="submit" value="Iniciar Sesion">';
+        echo '<input type="hidden" name="login" value="si">';
+        echo '</section>';
+        echo '</form>';
+    }
+
 
     /**
      * Echo the basic css of the web.
