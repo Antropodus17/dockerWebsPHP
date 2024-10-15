@@ -102,7 +102,7 @@ class Validador {
      * @throws UserException si el usuario no existe.
      * @return void
      */
-    function validateUserLogin(string $user) {
+    public function validateUserLogin(string $user) {
         $user = Validador::clean($user);
         if (null === $user || !isset($this->usersDatabase[$user])) {
             throw new UserException("Wrong user");
@@ -119,7 +119,7 @@ class Validador {
      * @throws PasswordException si la contraseña es incorrecta.
      * @return void
      */
-    function validatePasswordLogin(string $user, string $password) {
+    public function validatePasswordLogin(string $user, string $password) {
         if (!$this->comprobarValorArray($this->usersDatabase, Validador::clean($user), Validador::clean($_POST["paswd"]))) {
             throw new PasswordException("Wrong password");
         }
