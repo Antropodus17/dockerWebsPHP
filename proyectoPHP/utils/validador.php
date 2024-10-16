@@ -8,7 +8,7 @@ require_once("errors/PasswordException.php");
 require_once("errors/UserException.php");
 
 /**
- * Clase Validador que contiene funciones para validar datos.
+ * Validator class that contains functions to validate data.
  * @package proyectoPHP/utils
  * @author A23SergioPN
  */
@@ -17,7 +17,7 @@ class Validador {
     //PROPERTIES
 
     /**
-     * Array con los usuarios de la base de datos.
+     * Array with the users in the database.
      * @var array $usersDatabase
      * @access private
      */
@@ -30,10 +30,10 @@ class Validador {
     //FUNCTIONS
 
     /**
-     * Limpia los datos antes de mostrarlos en la página.
+     * Cleans the data before displaying it on the page.
      * @access public
-     * @param string $data Dato a limpiar.
-     * @return string Dato limpio.
+     * @param string $data Data to clean.
+     * @return string Cleaned data.
      */
     public static function clean(string $data): string {
         $data = trim($data);
@@ -43,32 +43,30 @@ class Validador {
     }
 
     /**
-     * Valida si un valor es un porcentaje del rango.
+     * Validates if a value is a percentage within the range.
      * @access public
-     * @param float $value Valor a validar.
-     * @return bool true si el valor es un porcentaje del rango.
+     * @param float $value Value to validate.
+     * @return bool true if the value is a percentage within the range.
      */
     public function validatePercentage(float $value): bool {
         return $value >= 0 && $value <= 250;
     }
-
     /**
-     * Valida si un valor es una cantidad positiva de recursos.
+     * Validates if a value is a positive quantity of resources.
      * @access public
-     * @param int $value Valor a validar.
-     * @return bool true si el valor es una cantidad positiva de recursos.
+     * @param int $value Value to validate.
+     * @return bool true if the value is a positive quantity of resources.
      */
     public function validateCantity(int $value): bool {
         return $value >= 0;
     }
-
     /**
-     * Valida si los datos de un formulario de generadores son correctos.
+     * Validates if the data of a generator form is correct.
      * @access public
-     * @param string $index Índice del generador del formulario.
-     * @return bool true si los datos del formulario son correctos.
-     * @throws GeneratorUdsException si la cantidad de recursos es incorrecta.
-     * @throws GeneratorPercentageException si el porcentaje es incorrecto.
+     * @param string $index Index of the generator in the form.
+     * @return bool true if the form data is correct.
+     * @throws GeneratorUdsException if the quantity of resources is incorrect.
+     * @throws GeneratorPercentageException if the percentage is incorrect.
      */
     public function validateGeneratorForm(string $index): bool {
         if (!is_int(intval($_POST[$index])) || !$this->validateCantity(intval($_POST[$index]))) {
@@ -78,14 +76,13 @@ class Validador {
         }
         return true;
     }
-
     /**
-     * Comprueba si un valor es igual al valor de un array en una clave determinada.
+     * Checks if a value is equal to the value of an array at a given key.
      * @access public
-     * @param array $array Array en el que se va a buscar.
-     * @param string|int $key Clave en la que se va a buscar.
-     * @param mixed $value Valor que se va a comparar.
-     * @return bool true si el valor es igual al valor del array en la clave determinada.
+     * @param array $array Array in which to search.
+     * @param string|int $key Key at which to search.
+     * @param mixed $value Value to compare.
+     * @return bool true if the value is equal to the value of the array at the given key.
      */
     public function comprobarValorArray(array $array, string|int $key, mixed $value): bool {
         if (isset($array[$key]) && $array[$key] == $value) {
@@ -96,10 +93,10 @@ class Validador {
 
 
     /**
-     * Valida si el usuario existe en la base de datos.
+     * Validates if the user exists in the database.
      * @access public
-     * @param string $user Usuario a validar.
-     * @throws UserException si el usuario no existe.
+     * @param string $user User to validate.
+     * @throws UserException if the user does not exist.
      * @return void
      */
     public function validateUserLogin(string $user) {
@@ -110,13 +107,12 @@ class Validador {
     }
 
 
-
     /**
-     * Valida si la contraseña es correcta para un usuario.
+     * Validates if the password is correct for a user.
      * @access public
-     * @param string $user Usuario de la contraseña.
-     * @param string $password Contraseña a validar.
-     * @throws PasswordException si la contraseña es incorrecta.
+     * @param string $user User of the password.
+     * @param string $password Password to validate.
+     * @throws PasswordException if the password is incorrect.
      * @return void
      */
     public function validatePasswordLogin(string $user, string $password) {
