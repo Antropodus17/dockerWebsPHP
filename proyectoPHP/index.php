@@ -22,14 +22,12 @@ require_once("./utils/pageBasics.php");
 </head>
 
 <body>
-    <header>
-        <?php
-        $pageBasics = new PageBasics();
-        $pageBasics->createHeader()
-        ?>
-    </header>
+    <?php
+    $header = new PageBasics();
+    $header->createHeader()
+    ?>
     <main>
-        <h1>Welcome to the satisfactory Calculator</h1>
+        <h1>Welcome to the Satisfactory Calculator</h1>
         <p>A page decdicated to help people to planify their fabrics </p>
         <a href="http://localhost/proyectoPHP/src/resoursesCalculator.php">
             <section>
@@ -43,9 +41,10 @@ require_once("./utils/pageBasics.php");
             </section>
         </a>
     </main>
-    <footer>
-
-    </footer>
+    <?php
+    $footer = new PageBasics();
+    $footer->createFooter();
+    ?>
 </body>
 
 </html>

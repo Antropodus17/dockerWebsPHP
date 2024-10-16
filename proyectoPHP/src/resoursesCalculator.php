@@ -57,7 +57,7 @@ function validateResourceForm(): bool {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energy Calculator</title>
     <?php PageBasics::basicCss(); ?>
-    <link rel="stylesheet" href="../styles/resourcesForm.css">
+    <link rel="stylesheet" href="../styles/resourcesForm.css?">
 </head>
 
 <body>

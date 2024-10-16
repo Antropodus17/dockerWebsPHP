@@ -1,15 +1,15 @@
 <?php
 
 declare(strict_types=1);
-function persona(?string $nombre,int $edad, string $apellido="Apelido")
-    {
-        if ($edad < 0) {
-            throw new Exception("La edad no puede ser negativa");
-        } else {
-            echo "<p><strong>".$nombre." ".$apellido." is ".$edad." years old.</strong></p>";
-        }
+function persona(?string $nombre, int $edad, string $apellido = "Apelido") {
+    if ($edad < 0) {
+        throw new Exception("La edad no puede ser negativa");
+    } else {
+        echo "<p><strong>" . $nombre . " " . $apellido . " is " . $edad . " years old.</strong></p>";
     }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,12 +38,12 @@ function persona(?string $nombre,int $edad, string $apellido="Apelido")
     <?php
     try {
         echo "<p>1ª Prueba</p>";
-        persona($_POST["Nombre"],intval($_POST["Edad"]),$_POST["Apellido"]);
+        persona($_POST["Nombre"], intval($_POST["Edad"]), $_POST["Apellido"]);
         echo "<p>2ª Prueba</p>";
-        persona(null,intval($_POST["Edad"]));
-    }catch(TypeError $e){
+        persona(null, intval($_POST["Edad"]));
+    } catch (TypeError $e) {
         echo $e->getMessage();
-    }catch(Exception $e){
+    } catch (Exception $e) {
         echo $e->getMessage();
     }
     ?>
