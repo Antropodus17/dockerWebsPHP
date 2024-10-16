@@ -9,7 +9,7 @@ require_once("../utils/Calculator.php");
 
 session_start();
 if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
-    setcookie("noUser", $_SERVER["PHP_SELF"], time() + 60 * 60, "/");
+    setcookie("noUser", htmlspecialchars($_SERVER["PHP_SELF"]), time() + 60 * 60, "/");
     header("Location: /proyectoPHP/auth/login.php");
     exit();
 }
@@ -57,7 +57,7 @@ function validateResourceForm(): bool {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energy Calculator</title>
     <?php PageBasics::basicCss(); ?>
-    <link rel="stylesheet" href="../styles/resourcesForm.css">
+    <link rel="stylesheet" href="../styles/resourcesForm.css?">
 </head>
 
 <body>

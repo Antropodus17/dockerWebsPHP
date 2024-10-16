@@ -99,7 +99,7 @@ class PageBasics {
      */
     public function createResourcesForm(): void {
         echo "<h1>Resources Calculator</h1>";
-        echo "<form action=" . $_SERVER["PHP_SELF"] . " method='post'>";
+        echo "<form action=" . htmlspecialchars($_SERVER["PHP_SELF"]) . " method='post'>";
         echo "<select name='resource" . $this::$indiceForm . "'>";
         echo "<option disable value='0' selected>Select Resurce </option>";
         foreach ($this->dataBase->resources as $key => $value) {
@@ -117,7 +117,7 @@ class PageBasics {
      * @return void
      */
     public function createGeneratorForm(): void {
-        echo "<form action=" . $_SERVER["PHP_SELF"] . " method='post'>";
+        echo "<form action=" . htmlspecialchars($_SERVER["PHP_SELF"]) . " method='post'>";
         echo "<article>";
         foreach ($this->dataBase->generators as $index => $generator) {
             echo "<section index=" . $this::$indiceForm++ . ">";
@@ -151,7 +151,7 @@ class PageBasics {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $validate = true;
         }
-        echo '<form action=' . $_SERVER["PHP_SELF"] . ' method="post">';
+        echo '<form action=' . htmlspecialchars($_SERVER["PHP_SELF"]) . ' method="post">';
         echo '<section class="entrada">';
         echo '<label for="user">User: </label>';
         echo '<input type="text" name="user" id="iUser">';

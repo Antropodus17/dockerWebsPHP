@@ -34,11 +34,11 @@ header {
 	align-items: center;
 }
 header a img {
-	width: 250px;
+	max-width: 250px;
 	min-height: auto;
 }
 header > section img {
-	width: 50px;
+	max-width: 50px;
 	min-height: auto;
 }
 footer {
