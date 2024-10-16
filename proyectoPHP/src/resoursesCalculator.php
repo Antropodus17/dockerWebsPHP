@@ -9,7 +9,7 @@ require_once("../utils/Calculator.php");
 
 session_start();
 if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
-    setcookie("noUser", $_SERVER["PHP_SELF"], time() + 60 * 60, "/");
+    setcookie("noUser", htmlspecialchars($_SERVER["PHP_SELF"]), time() + 60 * 60, "/");
     header("Location: /proyectoPHP/auth/login.php");
     exit();
 }
