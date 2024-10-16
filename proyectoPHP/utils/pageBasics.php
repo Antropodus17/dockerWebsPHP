@@ -12,7 +12,7 @@ require_once("Calculator.php");
 /**
  * Class PageBasics
  * a class to create the basic structure of the web
- * @package proyectoPHP/utils
+ * @package proyectoPHP\utils
  * @author A23SergioPN
  */
 class PageBasics {

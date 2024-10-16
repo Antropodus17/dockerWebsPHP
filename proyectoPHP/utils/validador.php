@@ -9,7 +9,7 @@ require_once("errors/UserException.php");
 
 /**
  * Validator class that contains functions to validate data.
- * @package proyectoPHP/utils
+ * @package proyectoPHP\utils
  * @author A23SergioPN
  */
 class Validador {

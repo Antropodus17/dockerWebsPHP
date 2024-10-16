@@ -5,7 +5,7 @@ require_once("satisfactoryObjects.php");
 
 /**
  * Class Calculator to calculate the resources needed to create a product and the total energy.
- * @package proyectoPHP/utils
+ * @package proyectoPHP\utils
  * @author A23SergioPN
  */
 class Calculator {

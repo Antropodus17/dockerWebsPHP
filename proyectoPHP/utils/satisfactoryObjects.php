@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * Class SatisfactoryObjects to simulate a data base for the objects of the game.
- * @package proyectoPHP/utils
+ * @package proyectoPHP\utils
  * @author A23SergioPN
  */
 class SatisfactoryObjects {

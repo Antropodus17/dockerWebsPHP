@@ -18,7 +18,7 @@ if (!isset($_SESSION["user"])) { //COMPROBATE IF SESSION IS STARTED
  * Validate the amount of resources and if it is a positive integer
  * @param string $cantidad the amount of resources
  * @return bool if the amount is a positive integer
- * @package proyectoPHP/src
+ * @package proyectoPHP\src
  * @author A23SergioPN
  */
 function validateUds(string $cantidad): bool {
@@ -30,7 +30,7 @@ function validateUds(string $cantidad): bool {
  * Validate the index of the resource
  * @param string $resource the index of the resource
  * @return string the index of the resource cleaned
- * @package proyectoPHP/src
+ * @package proyectoPHP\src
  * @author A23SergioPN
  */
 function validateIndex($resource): string {
@@ -41,7 +41,7 @@ function validateIndex($resource): string {
 /**
  * Validate the form of the resources
  * @return bool if the form is valid
- * @package proyectoPHP/src
+ * @package proyectoPHP\src
  * @author A23SergioPN
  */
 function validateResourceForm(): bool {

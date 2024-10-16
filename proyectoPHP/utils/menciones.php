@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 /**
  * Class Mentions to print the mentions of the icons.
- * @package proyectoPHP/utils
+ * @package proyectoPHP\utils
  * @version 1.0
  */
 class Mentions {
